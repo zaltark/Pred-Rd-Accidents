@@ -38,6 +38,8 @@ Based on our initial Exploratory Data Analysis, here is a summary of the trainin
 
 2.  **`road_type`**: The 'urban' road type is associated with a noticeably higher mean `accident_risk` compared to 'rural' and 'highway'. This feature is likely acting as a proxy for latent variables such as traffic density, intersection complexity, and pedestrian activity.
 
+3.  **`holiday`**: The mean `accident_risk` is consistently higher on holidays compared to non-holidays, across all times of day. This suggests that `holiday` is a strong predictive feature.
+
 ## Proposed Feature Engineering
 
 Based on our EDA, the following feature engineering steps are proposed before modeling:
