@@ -45,6 +45,13 @@ def generate_html_report(plots_by_category):
                 <p>For a more detailed look at the effect of road signs, see the <a href="deep_dive_road_signs.html">Deep Dive: Road Signs and Accident Risk</a> report.</p>
             </div>
             """
+        if category == "Temporal Factors":
+            html_content += """
+            <div class="plot">
+                <h3>Deep Dive Analysis</h3>
+                <p>For a more detailed look at the interaction of temporal features, see the <a href="deep_dive_temporal.html">Deep Dive: Temporal Features and Accident Risk</a> report.</p>
+            </div>
+            """
         html_content += "</div>"
 
 
