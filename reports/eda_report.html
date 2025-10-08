@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploratory Data Analysis Report</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        h1, h2 { color: #333; }
+        img { border: 1px solid #ddd; border-radius: 4px; padding: 5px; max-width: 100%; height: auto; }
+        .container { max-width: 800px; margin: auto; }
+        .plot { margin-bottom: 2em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Exploratory Data Analysis Report</h1>
+
+        <div class="plot">
+            <h2>Accident Risk Distribution</h2>
+            <img src="figures/accident_risk_distribution.png" alt="Accident Risk Distribution">
+            <p>This histogram shows the distribution of our target variable, `accident_risk`. It appears to be somewhat skewed, which might influence our choice of model or evaluation strategy.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Curvature Distribution</h2>
+            <img src="figures/curvature_distribution.png" alt="Curvature Distribution">
+            <p>This plot shows the distribution of road curvature. Understanding the spread of this variable is important for identifying if certain road curvatures are more common in the dataset.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Holiday Distribution</h2>
+            <img src="figures/holiday_distribution.png" alt="Holiday Distribution">
+            <p>This bar chart shows the balance between holidays and non-holidays. As expected, the vast majority of the data points are not on holidays.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Lighting Distribution</h2>
+            <img src="figures/lighting_distribution.png" alt="Lighting Distribution">
+            <p>This plot shows the distribution of lighting conditions. This will be a key feature to explore in relation to accident risk.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Number of Lanes Distribution</h2>
+            <img src="figures/num_lanes_distribution.png" alt="Number of Lanes Distribution">
+            <p>This histogram shows the distribution of the number of lanes. We can see which lane counts are most common in the dataset.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Number of Reported Accidents Distribution</h2>
+            <img src="figures/num_reported_accidents_distribution.png" alt="Number of Reported Accidents Distribution">
+            <p>This plot shows the distribution of previously reported accidents. It seems that most road segments have a low number of previously reported accidents.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Public Road Distribution</h2>
+            <img src="figures/public_road_distribution.png" alt="Public Road Distribution">
+            <p>This chart shows the balance between public and private roads. The majority of roads in the dataset are public.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Road Signs Present Distribution</h2>
+            <img src="figures/road_signs_present_distribution.png" alt="Road Signs Present Distribution">
+            <p>This chart shows the balance between roads with and without signs. This is another important feature for our model.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Road Type Distribution</h2>
+            <img src="figures/road_type_distribution.png" alt="Road Type Distribution">
+            <p>This bar chart shows the frequency of each road type. This helps us understand the balance of different road types in the data.</p>
+        </div>
+
+        <div class="plot">
+            <h2>School Season Distribution</h2>
+            <img src="figures/school_season_distribution.png" alt="School Season Distribution">
+            <p>This chart shows the balance between school season and non-school season data points.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Speed Limit Distribution</h2>
+            <img src="figures/speed_limit_distribution.png" alt="Speed Limit Distribution">
+            <p>This histogram shows the distribution of speed limits. We can see the common speed limits in the dataset.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Time of Day Distribution</h2>
+            <img src="figures/time_of_day_distribution.png" alt="Time of Day Distribution">
+            <p>This bar chart shows the frequency of different times of day. This will be a crucial feature for understanding accident risk.</p>
+        </div>
+
+        <div class="plot">
+            <h2>Weather Distribution</h2>
+            <img src="figures/weather_distribution.png" alt="Weather Distribution">
+            <p>This bar chart shows the frequency of different weather conditions. As expected, clear weather is the most common condition.</p>
+        </div>
+
+    </div>
+</body>
+</html>
