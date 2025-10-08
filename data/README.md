@@ -31,3 +31,19 @@ Based on our initial Exploratory Data Analysis, here is a summary of the trainin
     *   **Categorical**: `road_type`, `lighting`, `weather`, `time_of_day`.
     *   **Boolean**: `road_signs_present`, `public_road`, `holiday`, `school_season`.
 *   **Target Variable**: `accident_risk` is a float between 0 and 1.
+
+## Key Findings from Deeper Analysis
+
+1.  **`road_signs_present`**: Our deep-dive analysis shows that this feature has a negligible effect on the *median* accident risk, even when controlling for `road_type`. While a model might find a subtle signal, this is not a strong predictor on its own.
+
+2.  **`road_type`**: The 'urban' road type is associated with a noticeably higher mean `accident_risk` compared to 'rural' and 'highway'. This feature is likely acting as a proxy for latent variables such as traffic density, intersection complexity, and pedestrian activity.
+
+## Proposed Feature Engineering
+
+Based on our EDA, the following feature engineering steps are proposed before modeling:
+
+1.  **Encode Categorical Variables**: Machine learning models require numerical input. All categorical features (`road_type`, `lighting`, `weather`, `time_of_day`, and boolean features) will need to be converted to a numerical format.
+
+2.  **One-Hot Encoding**: This is the proposed method for encoding our categorical features. It will create new binary columns for each category (e.g., `is_urban`, `is_rural`), allowing the model to learn a specific weight for each one.
+
+3.  **Create Interaction Features**: We should explore creating new features by combining existing ones. For example, a 'poor_visibility' feature could be created by combining specific categories from the `lighting` and `weather` columns. This could capture non-linear relationships and provide more predictive power.
