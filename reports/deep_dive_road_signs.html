@@ -1,0 +1,36 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deep Dive: Road Signs and Accident Risk</title>
+        <style>
+            body { font-family: sans-serif; margin: 2em; }
+            h1, h2 { color: #333; }
+            img { border: 1px solid #ddd; border-radius: 4px; padding: 5px; max-width: 100%; height: auto; }
+            .container { max-width: 800px; margin: auto; }
+            .plot { margin-bottom: 2em; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Deep Dive: The Effect of Road Signs on Accident Risk</h1>
+            <div class="plot">
+                <h2>Road Signs vs. Accident Risk, Faceted by Road Type</h2>
+                <img src="figures\road_signs_faceted_by_road_type.png" alt="Faceted Box Plot of Road Signs vs. Accident Risk">
+                <p>
+    <p>This plot investigates the effect of road signs on accident risk, while controlling for the type of road. We do this because the effect of a road sign might be different depending on the context of the road (urban, rural, or highway).</p>
+    <p><strong>How to read this plot:</strong> Each of the three plots above shows a comparison of accident risk for roads with and without signs, but only for a specific road type.</p>
+    <ul>
+        <li><strong>Urban:</strong> Compare the 'True' and 'False' boxes in the 'urban' plot.</li>
+        <li><strong>Rural:</strong> Compare the 'True' and 'False' boxes in the 'rural' plot.</li>
+        <li><strong>Highway:</strong> Compare the 'True' and 'False' boxes in the 'highway' plot.</li>
+    </ul>
+    <p><strong>What to look for:</strong> If, within a specific road type, the median accident risk (the line in the middle of the box) is lower for 'True' (signs present) than for 'False' (signs not present), it suggests that road signs have a positive safety effect in that context. If the boxes are at a similar level, it suggests that road signs may not have a significant effect for that road type, or that other confounding variables are still at play.</p>
+    </p>
+            </div>
+        </div>
+    </body>
+    </html>
+    
