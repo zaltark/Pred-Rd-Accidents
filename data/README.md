@@ -40,6 +40,8 @@ Based on our initial Exploratory Data Analysis, here is a summary of the trainin
 
 3.  **`holiday`**: The mean `accident_risk` is consistently higher on holidays compared to non-holidays, across all times of day. This suggests that `holiday` is a strong predictive feature.
 
+4.  **`school_season` and `time_of_day` Interaction**: These two features have a complex interaction. Accident risk is higher in the afternoon during the school season (likely due to school letting out), but surprisingly *lower* in the morning. This indicates that a simple boolean `school_season` feature is not enough to capture the full pattern.
+
 ## Proposed Feature Engineering
 
 Based on our EDA, the following feature engineering steps are proposed before modeling:
@@ -48,4 +50,6 @@ Based on our EDA, the following feature engineering steps are proposed before mo
 
 2.  **One-Hot Encoding**: This is the proposed method for encoding our categorical features. It will create new binary columns for each category (e.g., `is_urban`, `is_rural`), allowing the model to learn a specific weight for each one.
 
-3.  **Create Interaction Features**: We should explore creating new features by combining existing ones. For example, a 'poor_visibility' feature could be created by combining specific categories from the `lighting` and `weather` columns. This could capture non-linear relationships and provide more predictive power.
+3.  **Create Interaction Features**: We should explore creating new features by combining existing ones to capture non-linear relationships. 
+    *   A `poor_visibility` feature could be created by combining specific categories from the `lighting` and `weather` columns.
+    *   A `school_season_x_time_of_day` interaction feature should be created to capture the complex, time-dependent effect of the school season. This would involve creating new categories like 'School_Morning', 'NonSchool_Afternoon', etc.
