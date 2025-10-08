@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import os
 
-def generate_html_report(plots):
+def generate_html_report(plots_by_category):
     html_content = """
     <!DOCTYPE html>
     <html lang="en">
@@ -13,10 +13,11 @@ def generate_html_report(plots):
         <title>Exploratory Data Analysis Report</title>
         <style>
             body { font-family: sans-serif; margin: 2em; }
-            h1, h2 { color: #333; }
+            h1, h2, h3 { color: #333; }
             img { border: 1px solid #ddd; border-radius: 4px; padding: 5px; max-width: 100%; height: auto; }
             .container { max-width: 800px; margin: auto; }
             .plot { margin-bottom: 2em; }
+            .category { margin-bottom: 3em; border-bottom: 2px solid #ccc; padding-bottom: 2em; }
         </style>
     </head>
     <body>
@@ -24,14 +25,28 @@ def generate_html_report(plots):
             <h1>Exploratory Data Analysis Report</h1>
     """
 
-    for plot in plots:
+    for category, plots in plots_by_category.items():
         html_content += f"""
-        <div class="plot">
-            <h2>{plot['title']}</h2>
-            <img src="{plot['path']}" alt="{plot['title']}">
-            <p>{plot['explanation']}</p>
-        </div>
+        <div class="category">
+            <h2>{category}</h2>
         """
+        for plot in plots:
+            html_content += f"""
+            <div class="plot">
+                <h3>{plot['title']}</h3>
+                <img src="{plot['path']}" alt="{plot['title']}">
+                <p>{plot['explanation']}</p>
+            </div>
+            """
+        if category == "Safety & Historical Factors":
+            html_content += """
+            <div class="plot">
+                <h3>Deep Dive Analysis</h3>
+                <p>For a more detailed look at the effect of road signs, see the <a href="deep_dive_road_signs.html">Deep Dive: Road Signs and Accident Risk</a> report.</p>
+            </div>
+            """
+        html_content += "</div>"
+
 
     html_content += """
         </div>
@@ -44,123 +59,91 @@ def generate_html_report(plots):
 # --- Main script ---
 output_dir = 'reports/figures'
 os.makedirs(output_dir, exist_ok=True)
-plots_info = []
+
+# Define feature categories
+road_characteristics = ['road_type', 'num_lanes', 'curvature', 'speed_limit', 'public_road']
+environmental_conditions = ['lighting', 'weather']
+temporal_factors = ['time_of_day', 'holiday', 'school_season']
+safety_historical_factors = ['road_signs_present', 'num_reported_accidents']
+
+all_features = road_characteristics + environmental_conditions + temporal_factors + safety_historical_factors
+plots_by_category = {
+    "Road Characteristics": [],
+    "Environmental Conditions": [],
+    "Temporal Factors": [],
+    "Safety & Historical Factors": [],
+    "Other": []
+}
+
+def get_category(col):
+    if col in road_characteristics:
+        return "Road Characteristics"
+    elif col in environmental_conditions:
+        return "Environmental Conditions"
+    elif col in temporal_factors:
+        return "Temporal Factors"
+    elif col in safety_historical_factors:
+        return "Safety & Historical Factors"
+    else:
+        return "Other"
 
 try:
     df = pd.read_csv('train.csv')
     df_sample = df.sample(n=1000, random_state=42)
 
-    # --- Visualize Numeric Features (Continuous) ---
-    numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
-    discrete_cols = ['num_lanes', 'num_reported_accidents', 'speed_limit']
-    continuous_cols = [col for col in numeric_cols if col not in discrete_cols and col != 'id']
-
-    for col in continuous_cols:
+    # --- Visualize All Features ---
+    for col in all_features:
+        category = get_category(col)
+        
         # Distribution plot
         plt.figure(figsize=(10, 6))
-        sns.histplot(df[col], kde=True)
+        if df[col].dtype == 'object' or df[col].dtype == 'bool':
+            sns.countplot(y=df[col], order = df[col].value_counts().index)
+        else: # numeric
+            if col in ['num_lanes', 'num_reported_accidents', 'speed_limit']: # discrete numeric
+                sns.countplot(x=df[col])
+            else: # continuous numeric
+                sns.histplot(df[col], kde=True)
+
         plt.title(f'Distribution of {col}')
-        plt.xlabel(col)
-        plt.ylabel('Frequency')
-        path = os.path.join('figures', f'{col}_distribution.png')
-        plt.savefig(os.path.join(output_dir, f'{col}_distribution.png'))
-        plt.close()
-        plots_info.append({
-            'title': f'Distribution of {col}',
-            'path': path,
-            'explanation': f'This histogram shows the distribution of {col}.'
-        })
-
-        # Scatter plot vs. accident_risk
-        plt.figure(figsize=(10, 6))
-        sns.scatterplot(x=df_sample[col], y=df_sample['accident_risk'])
-        plt.title(f'{col} vs. Accident Risk')
-        plt.xlabel(col)
-        plt.ylabel('Accident Risk')
-        path = os.path.join('figures', f'{col}_vs_accident_risk.png')
-        plt.savefig(os.path.join(output_dir, f'{col}_vs_accident_risk.png'))
-        plt.close()
-        plots_info.append({
-            'title': f'{col} vs. Accident Risk',
-            'path': path,
-            'explanation': f'This scatter plot shows the relationship between {col} and accident risk. We can look for trends or patterns that suggest a correlation.'
-        })
-
-
-    # --- Visualize Discrete Numeric Features ---
-    for col in discrete_cols:
-        # Distribution plot
-        plt.figure(figsize=(10, 6))
-        sns.countplot(x=df[col])
-        plt.title(f'Distribution of {col}')
-        plt.xlabel(col)
-        plt.ylabel('Count')
-        path = os.path.join('figures', f'{col}_distribution.png')
-        plt.savefig(os.path.join(output_dir, f'{col}_distribution.png'))
-        plt.close()
-        plots_info.append({
-            'title': f'Distribution of {col}',
-            'path': path,
-            'explanation': f'This bar chart shows the count of each value for the discrete feature {col}.'
-        })
-
-        # Box plot vs. accident_risk
-        plt.figure(figsize=(10, 6))
-        sns.boxplot(x=df[col], y=df['accident_risk'], order=sorted(df[col].unique()))
-        plt.title(f'{col} vs. Accident Risk')
-        plt.xlabel(col)
-        plt.ylabel('Accident Risk')
-        path = os.path.join('figures', f'{col}_vs_accident_risk.png')
-        plt.savefig(os.path.join(output_dir, f'{col}_vs_accident_risk.png'))
-        plt.close()
-        plots_info.append({
-            'title': f'{col} vs. Accident Risk',
-            'path': path,
-            'explanation': f'This box plot shows the distribution of accident risk for each value of {col}. We can see if there are significant differences in risk for different values of this feature.'
-        })
-
-
-    # --- Visualize Categorical Features ---
-    categorical_cols = df.select_dtypes(include=['object', 'bool']).columns
-    for col in categorical_cols:
-        # Distribution plot
-        plt.figure(figsize=(10, 6))
-        sns.countplot(y=df[col], order = df[col].value_counts().index)
-        plt.title(f'Distribution of {col}')
-        plt.xlabel('Count')
-        plt.ylabel(col)
         plt.tight_layout()
         path = os.path.join('figures', f'{col}_distribution.png')
         plt.savefig(os.path.join(output_dir, f'{col}_distribution.png'))
         plt.close()
-        plots_info.append({
+        plots_by_category[category].append({
             'title': f'Distribution of {col}',
             'path': path,
-            'explanation': f'This bar chart shows the frequency of each category for the feature {col}.'
+            'explanation': f'This plot shows the distribution of the {col} feature.'
         })
 
-        # Box plot vs. accident_risk
+        # Relationship with accident_risk
         plt.figure(figsize=(10, 6))
-        if df[col].dtype == 'bool':
-            sns.boxplot(y=df[col].astype(str), x=df['accident_risk'])
-        else:
-            sns.boxplot(y=df[col], x=df['accident_risk'], order = df[col].value_counts().index)
+        if df[col].dtype == 'object' or df[col].dtype == 'bool':
+            if df[col].dtype == 'bool':
+                sns.boxplot(y=df[col].astype(str), x=df['accident_risk'])
+            else:
+                sns.boxplot(y=df[col], x=df['accident_risk'], order = df[col].value_counts().index)
+        else: # numeric
+            if col in ['num_lanes', 'num_reported_accidents', 'speed_limit']: # discrete numeric
+                sns.boxplot(x=df[col], y=df['accident_risk'], order=sorted(df[col].unique()))
+            else: # continuous numeric
+                sns.scatterplot(x=df_sample[col], y=df_sample['accident_risk'])
+
         plt.title(f'{col} vs. Accident Risk')
-        plt.ylabel(col)
-        plt.xlabel('Accident Risk')
         plt.tight_layout()
         path = os.path.join('figures', f'{col}_vs_accident_risk.png')
         plt.savefig(os.path.join(output_dir, f'{col}_vs_accident_risk.png'))
         plt.close()
-        plots_info.append({
+        plots_by_category[category].append({
             'title': f'{col} vs. Accident Risk',
             'path': path,
-            'explanation': f'This box plot shows the distribution of accident risk for each category of {col}. We can look for differences in the median and spread of risk across categories.'
+            'explanation': f'This plot shows the relationship between {col} and accident risk.'
         })
+
 
     # --- Generate HTML Report ---
-    generate_html_report(plots_info)
-    print(f"Visualizations and HTML report saved to {output_dir} and reports/eda_report.html")
+    generate_html_report(plots_by_category)
+    print(f"Visualizations and updated HTML report saved.")
 
 except FileNotFoundError:
     print("Error: train.csv not found. Make sure the file is in the root directory.")
