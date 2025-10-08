@@ -19,3 +19,15 @@ The data pipeline consists of three stages, corresponding to the subdirectories 
 ## Data Versioning
 
 While not yet implemented, we should consider using a data versioning tool like [DVC (Data Version Control)](https://dvc.org/) in the future. This will allow us to track changes in our data and models, ensuring reproducibility.
+
+## Data Summary (Initial EDA)
+
+Based on our initial Exploratory Data Analysis, here is a summary of the training data:
+
+*   **Size**: The dataset contains 517,754 rows and 14 columns.
+*   **Missing Values**: There are no missing values in the dataset.
+*   **Column Types**:
+    *   **Numeric**: `id`, `num_lanes`, `curvature`, `speed_limit`, `num_reported_accidents`, `accident_risk` (target variable).
+    *   **Categorical**: `road_type`, `lighting`, `weather`, `time_of_day`.
+    *   **Boolean**: `road_signs_present`, `public_road`, `holiday`, `school_season`.
+*   **Target Variable**: `accident_risk` is a float between 0 and 1.
