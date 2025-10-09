@@ -46,10 +46,31 @@ Based on our initial Exploratory Data Analysis, here is a summary of the trainin
 
 Based on our EDA, the following feature engineering steps are proposed before modeling:
 
-1.  **Encode Categorical Variables**: Machine learning models require numerical input. All categorical features (`road_type`, `lighting`, `weather`, `time_of_day`, and boolean features) will need to be converted to a numerical format.
+1.  **Clarify `lighting` Categories**: As a first step, we will rename the categories in the `lighting` column to our new, more descriptive luminosity ratings.
+    *   `daylight` → **`Bright`**
+    *   `dim` → **`Dim`**
+    *   `night` → **`Dark`**
 
-2.  **One-Hot Encoding**: This is the proposed method for encoding our categorical features. It will create new binary columns for each category (e.g., `is_urban`, `is_rural`), allowing the model to learn a specific weight for each one.
+2.  **Create Interaction & Leveled Features**: Next, we will engineer new features to capture the complex, non-linear relationships discovered during our analysis.
+    *   **Visibility Score**: Using our new `lighting` categories, we will create a leveled, numerical feature to capture the combined risk of luminosity and `weather`. For example:
+        - **Level 0 (Best)**: Bright & Clear
+        - **Level 1 (Moderate)**: Bright with Rain/Fog, OR Dim & Clear
+        - **Level 2 (Poor)**: Dark & Clear, OR Dim with Rain/Fog
+        - **Level 3 (Worst)**: Dark with Rain/Fog
+    *   **`school_season_x_time_of_day`**: An interaction feature to capture the unique risk patterns of school season mornings and afternoons.
+    *   **`holiday_x_time_of_day_x_bright`**: A binary feature to flag the specific high-risk combination of a holiday, a specific time of day (e.g., afternoon/evening), and bright lighting. This is to help the model identify risks that are not weather-related but time and holiday dependent.
+    *   **`high_risk_curvature_interaction`**: A feature that multiplies `curvature` by a flag for high-risk conditions (e.g., `speed_limit` > 55 or `road_type` is 'highway') to capture the added danger of curves on fast roads.
+    *   **`speed_zone`**: A categorical feature to capture the non-linear effect of speed limit on risk. This will be created by binning `speed_limit` into two groups: `'low_speed'` (<= 45 mph) and `'high_speed'` (> 45 mph).
+    *   **`is_unsigned_urban_road`**: A binary feature that flags the specific, high-risk combination of a road being both 'urban' and having no road signs present.
+    *   **`is_accident_hotspot`**: A binary feature to flag roads that are known accident hotspots. This will be `True` if `num_reported_accidents` is 3 or more, and `False` otherwise.
+    *   **`lane_category`**: A categorical feature derived from `num_lanes` to capture non-linear risk patterns: `'single_lane'` (1), `'two_lanes'` (2), `'three_lanes'` (3), and `'multi_lanes'` (>= 4).
+    *   **`is_urban_evening_clear_weather`**: A binary feature flagging the specific high-risk combination of 'urban' `road_type`, 'evening' `time_of_day`, and 'clear' `weather`.
+    *   **`accident_hotspot_x_weather`**: A categorical interaction feature combining the `is_accident_hotspot` flag with `weather` conditions, to capture the weather-dependent threshold for accident hotspots.
+    *   **`low_speed_x_road_type_urban`**: A binary interaction feature to identify urban roads within low-speed zones.
+    *   **`low_speed_x_lane_category_two_lanes`**: A binary interaction feature to identify two-lane roads within low-speed zones.
+    *   **`low_speed_x_Visibility_Score`**: A numerical interaction feature to capture the combined effect of low-speed zones and visibility.
+    *   **`is_moderate_visibility_overprediction_zone`**: A binary feature to flag instances where `Visibility_Score` is 1 or 2, indicating a zone where the model systematically overpredicts risk.
 
-3.  **Create Interaction Features**: We should explore creating new features by combining existing ones to capture non-linear relationships. 
-    *   A `poor_visibility` feature could be created by combining specific categories from the `lighting` and `weather` columns.
-    *   A `school_season_x_time_of_day` interaction feature should be created to capture the complex, time-dependent effect of the school season. This would involve creating new categories like 'School_Morning', 'NonSchool_Afternoon', etc.
+3.  **Final Encoding**:
+    *   The new `Visibility Score` and other engineered numerical features will be scaled.
+    *   The remaining categorical features (like `road_type`, `weather`, etc.) will be one-hot encoded.

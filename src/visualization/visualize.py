@@ -38,6 +38,20 @@ def generate_html_report(plots_by_category):
                 <p>{plot['explanation']}</p>
             </div>
             """
+        if category == "Environmental Conditions":
+            html_content += """
+            <div class="plot">
+                <h3>Deep Dive Analysis</h3>
+                <p>For a more detailed look at the interaction of environmental features, see the <a href="deep_dive_environmental.html">Deep Dive: Environmental Factors and Accident Risk</a> report.</p>
+            </div>
+            """
+        if category == "Road Characteristics":
+            html_content += """
+            <div class="plot">
+                <h3>Deep Dive Analysis</h3>
+                <p>For a more detailed look at the interaction of road features, see the <a href="deep_dive_road_features.html">Deep Dive: Road Features and Accident Risk</a> report.</p>
+            </div>
+            """
         if category == "Safety & Historical Factors":
             html_content += """
             <div class="plot">
@@ -62,6 +76,73 @@ def generate_html_report(plots_by_category):
     """
     with open('reports/eda_report.html', 'w') as f:
         f.write(html_content)
+
+def plot_lighting_time_heatmap(df, output_dir):
+    """Generates and saves a heatmap of accident risk by lighting and time of day."""
+    plt.figure(figsize=(12, 8))
+    pivot_table = df.pivot_table(values='accident_risk', index='lighting', columns='time_of_day', aggfunc='mean')
+    sns.heatmap(pivot_table, annot=True, fmt=".3f", cmap="YlGnBu")
+    plt.title('Mean Accident Risk by Lighting and Time of Day')
+    path = os.path.join('figures', 'lighting_vs_time_of_day.png')
+    plt.savefig(os.path.join(output_dir, 'lighting_vs_time_of_day.png'))
+    plt.close()
+    return {
+        'title': 'Mean Accident Risk by Lighting and Time of Day',
+        'path': path,
+        'explanation': 'This heatmap shows the interaction between lighting conditions and time of day on accident risk.'
+    }
+
+def plot_bright_evening_comparison(df, output_dir):
+    """Generates a bar chart comparing accident risk for bright lighting across different times of the day."""
+    plt.figure(figsize=(10, 6))
+    bright_df = df[df['lighting'] == 'Bright']
+    sns.barplot(data=bright_df, x='time_of_day', y='accident_risk', order=['morning', 'afternoon', 'evening', 'night'])
+    plt.title('Mean Accident Risk for "Bright" Lighting by Time of Day')
+    plt.ylabel('Mean Accident Risk')
+    plt.xlabel('Time of Day')
+    path = os.path.join('figures', 'bright_evening_comparison.png')
+    plt.savefig(os.path.join(output_dir, 'bright_evening_comparison.png'))
+    plt.close()
+    return {
+        'title': 'Mean Accident Risk for "Bright" Lighting',
+        'path': path,
+        'explanation': 'This chart compares the mean accident risk during "Bright" lighting conditions across different times of the day, highlighting the risk in the evening.'
+    }
+
+def plot_bright_time_school_season_comparison(df, output_dir):
+    """Generates a grouped bar chart for bright afternoon/evening risk by school season."""
+    plt.figure(figsize=(10, 6))
+    filtered_df = df[(df['lighting'] == 'Bright') & (df['time_of_day'].isin(['afternoon', 'evening']))]
+    sns.barplot(data=filtered_df, x='time_of_day', y='accident_risk', hue='school_season', order=['afternoon', 'evening'])
+    plt.title('Mean Accident Risk for Bright Afternoon/Evening by School Season')
+    plt.ylabel('Mean Accident Risk')
+    plt.xlabel('Time of Day')
+    path = os.path.join('figures', 'bright_time_school_season_comparison.png')
+    plt.savefig(os.path.join(output_dir, 'bright_time_school_season_comparison.png'))
+    plt.close()
+    return {
+        'title': 'Bright Afternoon/Evening Risk by School Season',
+        'path': path,
+        'explanation': 'This chart compares accident risk in bright afternoon and evening, grouped by whether it is school season or not.'
+    }
+
+def plot_bright_time_holiday_comparison(df, output_dir):
+    """Generates a grouped bar chart for bright afternoon/evening risk by holiday."""
+    plt.figure(figsize=(10, 6))
+    filtered_df = df[(df['lighting'] == 'Bright') & (df['time_of_day'].isin(['afternoon', 'evening']))]
+    sns.barplot(data=filtered_df, x='time_of_day', y='accident_risk', hue='holiday', order=['afternoon', 'evening'])
+    plt.title('Mean Accident Risk for Bright Afternoon/Evening by Holiday')
+    plt.ylabel('Mean Accident Risk')
+    plt.xlabel('Time of Day')
+    path = os.path.join('figures', 'bright_time_holiday_comparison.png')
+    plt.savefig(os.path.join(output_dir, 'bright_time_holiday_comparison.png'))
+    plt.close()
+    return {
+        'title': 'Bright Afternoon/Evening Risk by Holiday',
+        'path': path,
+        'explanation': 'This chart compares accident risk in bright afternoon and evening, grouped by whether it is a holiday or not.'
+    }
+
 
 # --- Main script ---
 output_dir = 'reports/figures'
@@ -95,7 +176,14 @@ def get_category(col):
         return "Other"
 
 try:
-    df = pd.read_csv('train.csv')
+    df = pd.read_csv('data/raw/train.csv')
+    # Map lighting categories to new luminosity names
+    lighting_map = {
+        'daylight': 'Bright',
+        'dim': 'Dim',
+        'night': 'Dark'
+    }
+    df['lighting'] = df['lighting'].replace(lighting_map)
     df_sample = df.sample(n=1000, random_state=42)
 
     # --- Visualize All Features ---
@@ -129,10 +217,10 @@ try:
             if df[col].dtype == 'bool':
                 sns.boxplot(y=df[col].astype(str), x=df['accident_risk'])
             else:
-                sns.boxplot(y=df[col], x=df['accident_risk'], order = df[col].value_counts().index)
+                sns.boxplot(y=df[col], x=df['accident_risk'])
         else: # numeric
             if col in ['num_lanes', 'num_reported_accidents', 'speed_limit']: # discrete numeric
-                sns.boxplot(x=df[col], y=df['accident_risk'], order=sorted(df[col].unique()))
+                sns.boxplot(x=df[col], y=df['accident_risk'])
             else: # continuous numeric
                 sns.scatterplot(x=df_sample[col], y=df_sample['accident_risk'])
 
@@ -146,6 +234,19 @@ try:
             'path': path,
             'explanation': f'This plot shows the relationship between {col} and accident risk.'
         })
+
+    # --- Custom Visualizations ---
+    lighting_time_plot = plot_lighting_time_heatmap(df, output_dir)
+    plots_by_category["Environmental Conditions"].append(lighting_time_plot)
+
+    bright_evening_plot = plot_bright_evening_comparison(df, output_dir)
+    plots_by_category["Environmental Conditions"].append(bright_evening_plot)
+
+    bright_time_school_season_plot = plot_bright_time_school_season_comparison(df, output_dir)
+    plots_by_category["Temporal Factors"].append(bright_time_school_season_plot)
+
+    bright_time_holiday_plot = plot_bright_time_holiday_comparison(df, output_dir)
+    plots_by_category["Temporal Factors"].append(bright_time_holiday_plot)
 
 
     # --- Generate HTML Report ---

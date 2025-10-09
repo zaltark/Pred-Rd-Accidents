@@ -1,0 +1,9 @@
+Unique values in the 'lighting' column:
+- daylight
+- dim
+- night
+
+Unique values in the 'time_of_day' column:
+- afternoon
+- evening
+- morning

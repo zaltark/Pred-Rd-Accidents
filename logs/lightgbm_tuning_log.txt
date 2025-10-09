@@ -1,0 +1,13 @@
+--- LIGHTGBM Hyperparameter Tuning Log ---
+
+Best trial number: 39
+Best RMSE: 0.0771
+Best hyperparameters:
+  n_estimators: 900
+  learning_rate: 0.012240641341553967
+  num_leaves: 54
+  max_depth: 12
+  subsample: 0.7458623836778588
+  colsample_bytree: 0.7912002895672052
+  reg_alpha: 9.34571243555358e-07
+  reg_lambda: 9.049211093439775e-08

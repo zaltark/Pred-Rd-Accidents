@@ -11,23 +11,60 @@
             img { border: 1px solid #ddd; border-radius: 4px; padding: 5px; max-width: 100%; height: auto; }
             .container { max-width: 800px; margin: auto; }
             .plot { margin-bottom: 2em; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
         </style>
     </head>
     <body>
         <div class="container">
             <h1>Deep Dive: The Effect of Road Signs on Accident Risk</h1>
+            
+            <h2>Median Accident Risk</h2>
+            <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>road_signs_present</th>
+      <th>False</th>
+      <th>True</th>
+    </tr>
+    <tr>
+      <th>road_type</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>highway</th>
+      <td>0.34</td>
+      <td>0.34</td>
+    </tr>
+    <tr>
+      <th>rural</th>
+      <td>0.34</td>
+      <td>0.34</td>
+    </tr>
+    <tr>
+      <th>urban</th>
+      <td>0.35</td>
+      <td>0.35</td>
+    </tr>
+  </tbody>
+</table>
+            <p>The table above shows the precise median accident risk for each scenario. This allows us to quantify the differences that may not be obvious from the plots.</p>
+
             <div class="plot">
-                <h2>Road Signs vs. Accident Risk, Faceted by Road Type</h2>
-                <img src="figures\road_signs_faceted_by_road_type.png" alt="Faceted Box Plot of Road Signs vs. Accident Risk">
+                <h2>Direct Comparison of Mean Accident Risk</h2>
+                <img src="figures\road_signs_faceted_by_road_type_point.png" alt="Faceted Point Plot of Road Signs vs. Accident Risk">
+                <p>This plot shows the mean accident risk (the point) and the 95% confidence interval (the vertical line) for each scenario. This type of plot is excellent for directly comparing the central tendency between categories and determining if the differences are statistically significant.</p>
+            </div>
+
+            <div class="plot">
+                <h2>Distribution of Accident Risk (Box Plot)</h2>
+                <img src="figures\road_signs_faceted_by_road_type_box.png" alt="Faceted Box Plot of Road Signs vs. Accident Risk">
                 <p>
-    <p>This plot investigates the effect of road signs on accident risk, while controlling for the type of road. We do this because the effect of a road sign might be different depending on the context of the road (urban, rural, or highway).</p>
-    <p><strong>How to read this plot:</strong> Each of the three plots above shows a comparison of accident risk for roads with and without signs, but only for a specific road type.</p>
-    <ul>
-        <li><strong>Urban:</strong> Compare the 'True' and 'False' boxes in the 'urban' plot.</li>
-        <li><strong>Rural:</strong> Compare the 'True' and 'False' boxes in the 'rural' plot.</li>
-        <li><strong>Highway:</strong> Compare the 'True' and 'False' boxes in the 'highway' plot.</li>
-    </ul>
-    <p><strong>What to look for:</strong> If, within a specific road type, the median accident risk (the line in the middle of the box) is lower for 'True' (signs present) than for 'False' (signs not present), it suggests that road signs have a positive safety effect in that context. If the boxes are at a similar level, it suggests that road signs may not have a significant effect for that road type, or that other confounding variables are still at play.</p>
+    <p>This plot shows the distribution of accident risk for each scenario. While it gives a good sense of the overall spread, the differences in the median can be hard to discern.</p>
     </p>
             </div>
         </div>

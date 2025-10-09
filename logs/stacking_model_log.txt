@@ -1,0 +1,7 @@
+--- Stacking Model (XGBoost Base + XGBoost Residual) Log ---
+Model: Stacking (XGBoost Base + XGBoost Residual)
+MAE: 0.0592
+RMSE: 0.0767
+R2: 0.7871
+Total Training Time: 8.39 seconds
+-----------------------------------

@@ -1,0 +1,10 @@
+--- CATBOOST Hyperparameter Tuning Log ---
+
+Best trial number: 45
+Best RMSE: 0.0769
+Best hyperparameters:
+  iterations: 1200
+  learning_rate: 0.021879490828497022
+  depth: 8
+  l2_leaf_reg: 0.0002545380334079672
+  border_count: 224

@@ -1,0 +1,204 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Model Performance Analysis</title>
+        <style>
+            body { font-family: sans-serif; margin: 2em; }
+            h1, h2, h3 { color: #333; }
+            img { border: 1px solid #ddd; border-radius: 4px; padding: 5px; max-width: 100%; height: auto; }
+            .container { max-width: 800px; margin: auto; }
+            .plot { margin-bottom: 2em; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Model Performance Analysis</h1>
+            <p>This report visualizes the performance of the best-tuned model (CatBoost Regressor) to understand where it succeeds and fails.</p>
+    
+            <div class="plot">
+                <h2>Predicted vs. Actual Accident Risk</h2>
+                <img src="figures\predicted_vs_actual.png" alt="Predicted vs. Actual Accident Risk">
+                <p>This scatter plot shows the model's predictions against the true accident risk values. Points close to the red diagonal line indicate accurate predictions. Deviations from the line show where the model is over- or under-predicting.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Predicted vs. Actual Accident Risk (by Visibility Score)</h2>
+                <img src="figures\predicted_vs_actual_visibility_score.png" alt="Predicted vs. Actual Accident Risk (by Visibility Score)">
+                <p>This plot shows predictions vs. actuals, with points colored by the `Visibility_Score`. This helps identify if the model's performance varies systematically across different visibility conditions.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Predicted vs. Actual Accident Risk (by Weather)</h2>
+                <img src="figures\predicted_vs_actual_weather.png" alt="Predicted vs. Actual Accident Risk (by Weather)">
+                <p>This plot shows predictions vs. actuals, with points colored by the `weather` condition. This helps identify if the model's performance varies systematically across different weather conditions.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residual Plot</h2>
+                <img src="figures\residuals_plot.png" alt="Residual Plot">
+                <p>This plot shows the distribution of errors (residuals) against the predicted values. Ideally, residuals should be randomly scattered around zero, with no discernible patterns. Any patterns suggest systematic errors by the model.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residual Plot (by Visibility Score)</h2>
+                <img src="figures\residuals_plot_visibility_score.png" alt="Residual Plot (by Visibility Score)">
+                <p>This plot shows residuals vs. predictions, with points colored by the `Visibility_Score`. This helps identify if the model's systematic errors are concentrated within specific visibility conditions.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residual Plot (by Weather)</h2>
+                <img src="figures\residuals_plot_weather.png" alt="Residual Plot (by Weather)">
+                <p>This plot shows residuals vs. predictions, with points colored by the `weather` condition. This helps identify if the model's systematic errors are concentrated within specific weather conditions.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of Residuals</h2>
+                <img src="figures\residuals_distribution.png" alt="Distribution of Residuals">
+                <p>This histogram and KDE plot show the distribution of the model's errors. Ideally, it should be centered around zero and resemble a normal distribution. Skewness or multiple peaks indicate potential issues.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Top 20 Feature Importances</h2>
+                <img src="figures\feature_importance.png" alt="Top 20 Feature Importances">
+                <p>This plot shows the relative importance of the top 20 features as determined by the XGBoost model. Features with higher importance contribute more to the model's predictions.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Analysis of Moderate Risk Predictions (Predicted Risk 0.2 - 0.6)</h2>
+                <img src="" alt="Analysis of Moderate Risk Predictions (Predicted Risk 0.2 - 0.6)">
+                <p>This section provides a targeted analysis of data points where the model predicted accident risk between 0.2 and 0.6. This is the range where the model showed a funnel shape in its residuals.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of road_type in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_dist_road_type.png" alt="Distribution of road_type in Moderate Risk Predictions">
+                <p>This plot shows the distribution of the `road_type` feature specifically for data points where the predicted risk is between 0.2 and 0.6.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. road_type in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_residuals_road_type.png" alt="Residuals vs. road_type in Moderate Risk Predictions">
+                <p>This plot shows the residuals against the `road_type` feature, specifically for data points where the predicted risk is between 0.2 and 0.6. Patterns here indicate features contributing to systematic errors in this range.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of speed_zone in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_dist_speed_zone.png" alt="Distribution of speed_zone in Moderate Risk Predictions">
+                <p>This plot shows the distribution of the `speed_zone` feature specifically for data points where the predicted risk is between 0.2 and 0.6.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. speed_zone in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_residuals_speed_zone.png" alt="Residuals vs. speed_zone in Moderate Risk Predictions">
+                <p>This plot shows the residuals against the `speed_zone` feature, specifically for data points where the predicted risk is between 0.2 and 0.6. Patterns here indicate features contributing to systematic errors in this range.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of Visibility_Score in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_dist_Visibility_Score.png" alt="Distribution of Visibility_Score in Moderate Risk Predictions">
+                <p>This plot shows the distribution of the `Visibility_Score` feature specifically for data points where the predicted risk is between 0.2 and 0.6.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. Visibility_Score in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_residuals_Visibility_Score.png" alt="Residuals vs. Visibility_Score in Moderate Risk Predictions">
+                <p>This plot shows the residuals against the `Visibility_Score` feature, specifically for data points where the predicted risk is between 0.2 and 0.6. Patterns here indicate features contributing to systematic errors in this range.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of lane_category in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_dist_lane_category.png" alt="Distribution of lane_category in Moderate Risk Predictions">
+                <p>This plot shows the distribution of the `lane_category` feature specifically for data points where the predicted risk is between 0.2 and 0.6.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. lane_category in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_residuals_lane_category.png" alt="Residuals vs. lane_category in Moderate Risk Predictions">
+                <p>This plot shows the residuals against the `lane_category` feature, specifically for data points where the predicted risk is between 0.2 and 0.6. Patterns here indicate features contributing to systematic errors in this range.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of accident_hotspot_x_weather in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_dist_accident_hotspot_x_weather.png" alt="Distribution of accident_hotspot_x_weather in Moderate Risk Predictions">
+                <p>This plot shows the distribution of the `accident_hotspot_x_weather` feature specifically for data points where the predicted risk is between 0.2 and 0.6.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. accident_hotspot_x_weather in Moderate Risk Predictions</h2>
+                <img src="figures\moderate_risk_residuals_accident_hotspot_x_weather.png" alt="Residuals vs. accident_hotspot_x_weather in Moderate Risk Predictions">
+                <p>This plot shows the residuals against the `accident_hotspot_x_weather` feature, specifically for data points where the predicted risk is between 0.2 and 0.6. Patterns here indicate features contributing to systematic errors in this range.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Analysis of Model Failures (Absolute Residual > 0.1)</h2>
+                <img src="" alt="Analysis of Model Failures (Absolute Residual > 0.1)">
+                <p>This section provides a targeted analysis of data points where the model made significant errors (absolute residual greater than 0.1).</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of road_type in Failure Cases</h2>
+                <img src="figures\failure_dist_road_type.png" alt="Distribution of road_type in Failure Cases">
+                <p>This plot shows the distribution of the `road_type` feature specifically for data points where the model made significant errors (absolute residual > 0.1).</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. road_type in Failure Cases</h2>
+                <img src="figures\failure_residuals_road_type.png" alt="Residuals vs. road_type in Failure Cases">
+                <p>This plot shows the residuals against the `road_type` feature, specifically for data points where the model made significant errors (absolute residual > 0.1). Patterns here indicate features contributing to systematic errors in these failure cases.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of speed_zone in Failure Cases</h2>
+                <img src="figures\failure_dist_speed_zone.png" alt="Distribution of speed_zone in Failure Cases">
+                <p>This plot shows the distribution of the `speed_zone` feature specifically for data points where the model made significant errors (absolute residual > 0.1).</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. speed_zone in Failure Cases</h2>
+                <img src="figures\failure_residuals_speed_zone.png" alt="Residuals vs. speed_zone in Failure Cases">
+                <p>This plot shows the residuals against the `speed_zone` feature, specifically for data points where the model made significant errors (absolute residual > 0.1). Patterns here indicate features contributing to systematic errors in these failure cases.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of Visibility_Score in Failure Cases</h2>
+                <img src="figures\failure_dist_Visibility_Score.png" alt="Distribution of Visibility_Score in Failure Cases">
+                <p>This plot shows the distribution of the `Visibility_Score` feature specifically for data points where the model made significant errors (absolute residual > 0.1).</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. Visibility_Score in Failure Cases</h2>
+                <img src="figures\failure_residuals_Visibility_Score.png" alt="Residuals vs. Visibility_Score in Failure Cases">
+                <p>This plot shows the residuals against the `Visibility_Score` feature, specifically for data points where the model made significant errors (absolute residual > 0.1). Patterns here indicate features contributing to systematic errors in these failure cases.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of lane_category in Failure Cases</h2>
+                <img src="figures\failure_dist_lane_category.png" alt="Distribution of lane_category in Failure Cases">
+                <p>This plot shows the distribution of the `lane_category` feature specifically for data points where the model made significant errors (absolute residual > 0.1).</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. lane_category in Failure Cases</h2>
+                <img src="figures\failure_residuals_lane_category.png" alt="Residuals vs. lane_category in Failure Cases">
+                <p>This plot shows the residuals against the `lane_category` feature, specifically for data points where the model made significant errors (absolute residual > 0.1). Patterns here indicate features contributing to systematic errors in these failure cases.</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Distribution of accident_hotspot_x_weather in Failure Cases</h2>
+                <img src="figures\failure_dist_accident_hotspot_x_weather.png" alt="Distribution of accident_hotspot_x_weather in Failure Cases">
+                <p>This plot shows the distribution of the `accident_hotspot_x_weather` feature specifically for data points where the model made significant errors (absolute residual > 0.1).</p>
+            </div>
+        
+            <div class="plot">
+                <h2>Residuals vs. accident_hotspot_x_weather in Failure Cases</h2>
+                <img src="figures\failure_residuals_accident_hotspot_x_weather.png" alt="Residuals vs. accident_hotspot_x_weather in Failure Cases">
+                <p>This plot shows the residuals against the `accident_hotspot_x_weather` feature, specifically for data points where the model made significant errors (absolute residual > 0.1). Patterns here indicate features contributing to systematic errors in these failure cases.</p>
+            </div>
+        
+        </div>
+    </body>
+    </html>
+    

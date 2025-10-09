@@ -1,0 +1,72 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deep Dive: Environmental Factors and Accident Risk</title>
+        <style>
+            body { font-family: sans-serif; margin: 2em; }
+            h1, h2, h3 { color: #333; }
+            img { border: 1px solid #ddd; border-radius: 4px; padding: 5px; max-width: 100%; height: auto; }
+            .container { max-width: 800px; margin: auto; }
+            .plot { margin-bottom: 2em; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Deep Dive: Environmental Factors and Accident Risk</h1>
+            <p>This report explores the interactions between environmental factors like lighting and weather, and their combined effect on accident risk.</p>
+    
+        <div class="plot">
+            <h3>Lighting Conditions by Time of Day</h3>
+            <img src="figures\lighting_vs_time_of_day.png" alt="Lighting Conditions by Time of Day">
+            <p>This plot confirms the expected relationship between lighting and time of day. "Night" occurs only at night, "Daylight" mostly during the day. "Dawn" and "Dusk" appear at the appropriate times. This gives us confidence in the data's consistency.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk vs. Weather by Lighting Condition</h3>
+            <img src="figures\risk_vs_weather_by_lighting.png" alt="Accident Risk vs. Weather by Lighting Condition">
+            <p>This is a key insight. The impact of weather is highly dependent on lighting. Rainy and Foggy conditions at Night lead to a dramatic increase in accident risk compared to the same conditions during Daylight. This strongly supports creating an interaction feature.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk vs. Lighting by Road Type</h3>
+            <img src="figures\risk_vs_lighting_by_road_type.png" alt="Accident Risk vs. Lighting by Road Type">
+            <p>The increase in accident risk at Night is present across all road types, but it is most pronounced on Highways. This suggests that the combination of high speed and low visibility is particularly dangerous.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk Distribution in Clear Weather (Faceted)</h3>
+            <img src="figures\clear_weather_risk_dist_faceted.png" alt="Accident Risk Distribution in Clear Weather (Faceted)">
+            <p>This plot shows the distribution of accident risk specifically when weather is 'Clear', faceted by `road_type` and `time_of_day`. It helps identify if risk patterns vary even in good weather conditions.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Mean Accident Risk in Clear Weather (num_lanes vs. road_type)</h3>
+            <img src="figures\clear_weather_lanes_roadtype_interaction.png" alt="Mean Accident Risk in Clear Weather (num_lanes vs. road_type)">
+            <p>This plot shows how the mean accident risk changes with the number of lanes, faceted by road type, specifically when weather is 'Clear'. It highlights interactions that persist even in good weather.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Mean Accident Risk in Clear Weather (Road Type vs. Time of Day Heatmap)</h3>
+            <img src="figures\clear_weather_roadtype_time_heatmap.png" alt="Mean Accident Risk in Clear Weather (Road Type vs. Time of Day Heatmap)">
+            <p>This heatmap shows the mean accident risk for combinations of `road_type` and `time_of_day`, specifically when weather is 'Clear'. Darker cells indicate higher risk, helping to pinpoint specific high-risk contexts even in good weather.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Mean Accident Risk vs. Number of Reported Accidents (Faceted by Weather)</h3>
+            <img src="figures\accidents_vs_weather_interaction.png" alt="Mean Accident Risk vs. Number of Reported Accidents (Faceted by Weather)">
+            <p>This plot shows how the mean accident risk changes with the number of previously reported accidents, faceted by weather condition. It helps identify if the impact of historical accident data varies with weather.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Mean Accident Risk (Weather vs. Lighting Heatmap)</h3>
+            <img src="figures\weather_vs_lighting_heatmap.png" alt="Mean Accident Risk (Weather vs. Lighting Heatmap)">
+            <p>This heatmap shows the mean accident risk for all combinations of `weather` and `lighting` conditions. Darker cells indicate higher risk, highlighting the most dangerous environmental contexts.</p>
+        </div>
+        
+        </div>
+    </body>
+    </html>
+    

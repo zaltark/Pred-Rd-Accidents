@@ -43,3 +43,28 @@ Using synthetic data for Playground competitions allows us to strike a balance b
 - **3rd Place:** Choice of Kaggle merchandise
 
 Please note: In order to encourage more participation from beginners, Kaggle merchandise will only be awarded once per person in this series. If a person has previously won, we'll skip to the next team.
+
+## Session Summary: October 8, 2025 - Deep Dive & Model Refinement
+
+This session focused on an extensive deep dive into the dataset, iterative refinement of our feature engineering strategy, and initial model development and tuning.
+
+### Key Achievements & Findings:
+
+*   **Comprehensive EDA & Visualization**: Conducted thorough exploratory data analysis across all features, including detailed deep dives into environmental, temporal, and road characteristics. All visualization scripts were made robust and reports updated to reflect the latest insights.
+*   **Refined Feature Engineering Plan**: Developed a highly detailed feature engineering plan, documented in `data/README.md`, which includes:
+    *   Clarifying `lighting` categories to `Bright`, `Dim`, `Dark`.
+    *   Creating numerous interaction and leveled features: `Visibility_Score`, `school_season_x_time_of_day`, `high_risk_curvature_interaction`, `speed_zone`, `is_unsigned_urban_road`, `is_accident_hotspot`, `lane_category`, `is_urban_evening_clear_weather`, and `accident_hotspot_x_weather`.
+*   **Feature Engineering Pipeline Implementation**: Successfully implemented the `build_features.py` script to transform raw data into our final engineered feature set.
+*   **Baseline Model Testing**: Established baseline performance for 5 regression models (XGBoost, LightGBM, RandomForest, CatBoost, Ridge) using the full engineered feature set.
+*   **Hyperparameter Tuning (XGBoost & CatBoost)**: Utilized Optuna to tune XGBoost and CatBoost, achieving improved RMSE scores.
+*   **Residual Analysis & Stacking Model**: Investigated residual patterns, identifying heteroscedasticity. Implemented a stacking model (XGBoost base + tuned XGBoost residual) to address these systematic errors.
+*   **Target Transformation Experiment**: Explored logit transformation of the target variable to address heteroscedasticity, but this approach resulted in a worse Public Score and was reverted.
+*   **Best Model Performance**:
+    *   **Best Validation RMSE**: 0.076668 (achieved by the Stacking model with tuned residual component).
+    *   **Best Public Score**: 0.07576 (achieved by the Stacking model without target transformation).
+
+### Next Steps:
+
+*   Further investigate the residual patterns of our best model to identify new feature engineering opportunities.
+*   Explore more advanced ensemble techniques or alternative model architectures.
+*   Consider more extensive hyperparameter tuning or broader search spaces.

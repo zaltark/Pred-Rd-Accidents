@@ -1,0 +1,10 @@
+--- Final Submission Log ---
+
+--- Final Submission Details ---
+Model: Stacking (XGBoost Base + Tuned XGBoost Residual)
+Base Model Hyperparameters: {'objective': 'reg:squarederror', 'eval_metric': 'rmse', 'n_estimators': 550, 'learning_rate': 0.012370036011546435, 'max_depth': 8, 'subsample': 0.892769159931097, 'colsample_bytree': 0.763236692630663, 'gamma': 0.0009958537492133792, 'reg_alpha': 5.595257681864575e-07, 'reg_lambda': 2.3721727576947476e-07, 'random_state': 42, 'n_jobs': -1}
+Residual Model Hyperparameters: {'objective': 'reg:squarederror', 'eval_metric': 'rmse', 'n_estimators': 250, 'learning_rate': 0.04137912638367983, 'max_depth': 3, 'subsample': 0.999185234245023, 'colsample_bytree': 0.7901547283056515, 'gamma': 1.0845170900304183e-08, 'reg_alpha': 0.0016587705109178757, 'reg_lambda': 0.00012874468299642057, 'random_state': 42, 'n_jobs': -1}
+Total Training Time: 8.18 seconds
+Submission File: data\processed\submission.csv
+Note: RMSE on validation set for this model was 0.0767
+Public Score: 0.07576

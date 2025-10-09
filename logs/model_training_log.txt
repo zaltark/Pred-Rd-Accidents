@@ -1,0 +1,31 @@
+--- Model Training Log ---
+Model: XGBoostRegressor
+MAE: 0.0594
+RMSE: 0.0769
+R2: 0.7857
+Training Time: 1.38 seconds
+-----------------------------------
+Model: LightGBMRegressor
+MAE: 0.0594
+RMSE: 0.0769
+R2: 0.7858
+Training Time: 3.10 seconds
+-----------------------------------
+Model: RandomForestRegressor
+MAE: 0.0629
+RMSE: 0.0806
+R2: 0.7648
+Training Time: 82.66 seconds
+-----------------------------------
+Model: CatBoostRegressor
+MAE: 0.0594
+RMSE: 0.0769
+R2: 0.7859
+Training Time: 13.68 seconds
+-----------------------------------
+Model: RidgeRegressor
+MAE: 0.0712
+RMSE: 0.0898
+R2: 0.7076
+Training Time: 0.80 seconds
+-----------------------------------

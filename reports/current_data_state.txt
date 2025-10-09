@@ -1,0 +1,28 @@
+Current Data State Verification:
+
+Columns:
+['id', 'road_type', 'num_lanes', 'curvature', 'speed_limit', 'lighting', 'weather', 'road_signs_present', 'public_road', 'time_of_day', 'holiday', 'school_season', 'num_reported_accidents', 'accident_risk']
+
+Data Types:
+- id: int64
+- road_type: object
+- num_lanes: int64
+- curvature: float64
+- speed_limit: int64
+- lighting: object
+- weather: object
+- road_signs_present: bool
+- public_road: bool
+- time_of_day: object
+- holiday: bool
+- school_season: bool
+- num_reported_accidents: int64
+- accident_risk: float64
+
+First 5 Rows:
+   id road_type  num_lanes  curvature  speed_limit  lighting weather  road_signs_present  public_road time_of_day  holiday  school_season  num_reported_accidents  accident_risk
+0   0     urban          2       0.06           35  daylight   rainy               False         True   afternoon    False           True                       1           0.13
+1   1     urban          4       0.99           35  daylight   clear                True        False     evening     True           True                       0           0.35
+2   2     rural          4       0.63           70       dim   clear               False         True     morning     True          False                       2           0.30
+3   3   highway          4       0.07           35       dim   rainy                True         True     morning    False          False                       1           0.21
+4   4     rural          1       0.58           60  daylight   foggy               False        False     evening     True          False                       1           0.56

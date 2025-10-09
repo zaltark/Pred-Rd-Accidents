@@ -1,0 +1,13 @@
+--- XGBOOST Hyperparameter Tuning Log ---
+
+Best trial number: 9
+Best RMSE: 0.0768
+Best hyperparameters:
+  n_estimators: 600
+  learning_rate: 0.014573776010455569
+  max_depth: 7
+  subsample: 0.8170210701255334
+  colsample_bytree: 0.6866095431275107
+  gamma: 0.00016986163417457225
+  reg_alpha: 5.046234995621698e-06
+  reg_lambda: 4.4557619648885725e-08

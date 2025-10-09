@@ -7,172 +7,220 @@
         <title>Exploratory Data Analysis Report</title>
         <style>
             body { font-family: sans-serif; margin: 2em; }
-            h1, h2 { color: #333; }
+            h1, h2, h3 { color: #333; }
             img { border: 1px solid #ddd; border-radius: 4px; padding: 5px; max-width: 100%; height: auto; }
             .container { max-width: 800px; margin: auto; }
             .plot { margin-bottom: 2em; }
+            .category { margin-bottom: 3em; border-bottom: 2px solid #ccc; padding-bottom: 2em; }
         </style>
     </head>
     <body>
         <div class="container">
             <h1>Exploratory Data Analysis Report</h1>
     
-        <div class="plot">
-            <h2>Distribution of curvature</h2>
-            <img src="figures\curvature_distribution.png" alt="Distribution of curvature">
-            <p>This histogram shows the distribution of curvature.</p>
-        </div>
+        <div class="category">
+            <h2>Road Characteristics</h2>
         
-        <div class="plot">
-            <h2>curvature vs. Accident Risk</h2>
-            <img src="figures\curvature_vs_accident_risk.png" alt="curvature vs. Accident Risk">
-            <p>This scatter plot shows the relationship between curvature and accident risk. We can look for trends or patterns that suggest a correlation.</p>
-        </div>
+            <div class="plot">
+                <h3>Distribution of road_type</h3>
+                <img src="figures\road_type_distribution.png" alt="Distribution of road_type">
+                <p>This plot shows the distribution of the road_type feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>road_type vs. Accident Risk</h3>
+                <img src="figures\road_type_vs_accident_risk.png" alt="road_type vs. Accident Risk">
+                <p>This plot shows the relationship between road_type and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Distribution of num_lanes</h3>
+                <img src="figures\num_lanes_distribution.png" alt="Distribution of num_lanes">
+                <p>This plot shows the distribution of the num_lanes feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>num_lanes vs. Accident Risk</h3>
+                <img src="figures\num_lanes_vs_accident_risk.png" alt="num_lanes vs. Accident Risk">
+                <p>This plot shows the relationship between num_lanes and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Distribution of curvature</h3>
+                <img src="figures\curvature_distribution.png" alt="Distribution of curvature">
+                <p>This plot shows the distribution of the curvature feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>curvature vs. Accident Risk</h3>
+                <img src="figures\curvature_vs_accident_risk.png" alt="curvature vs. Accident Risk">
+                <p>This plot shows the relationship between curvature and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Distribution of speed_limit</h3>
+                <img src="figures\speed_limit_distribution.png" alt="Distribution of speed_limit">
+                <p>This plot shows the distribution of the speed_limit feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>speed_limit vs. Accident Risk</h3>
+                <img src="figures\speed_limit_vs_accident_risk.png" alt="speed_limit vs. Accident Risk">
+                <p>This plot shows the relationship between speed_limit and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Distribution of public_road</h3>
+                <img src="figures\public_road_distribution.png" alt="Distribution of public_road">
+                <p>This plot shows the distribution of the public_road feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>public_road vs. Accident Risk</h3>
+                <img src="figures\public_road_vs_accident_risk.png" alt="public_road vs. Accident Risk">
+                <p>This plot shows the relationship between public_road and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Deep Dive Analysis</h3>
+                <p>For a more detailed look at the interaction of road features, see the <a href="deep_dive_road_features.html">Deep Dive: Road Features and Accident Risk</a> report.</p>
+            </div>
+            </div>
+        <div class="category">
+            <h2>Environmental Conditions</h2>
         
-        <div class="plot">
-            <h2>Distribution of accident_risk</h2>
-            <img src="figures\accident_risk_distribution.png" alt="Distribution of accident_risk">
-            <p>This histogram shows the distribution of accident_risk.</p>
-        </div>
+            <div class="plot">
+                <h3>Distribution of lighting</h3>
+                <img src="figures\lighting_distribution.png" alt="Distribution of lighting">
+                <p>This plot shows the distribution of the lighting feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>lighting vs. Accident Risk</h3>
+                <img src="figures\lighting_vs_accident_risk.png" alt="lighting vs. Accident Risk">
+                <p>This plot shows the relationship between lighting and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Distribution of weather</h3>
+                <img src="figures\weather_distribution.png" alt="Distribution of weather">
+                <p>This plot shows the distribution of the weather feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>weather vs. Accident Risk</h3>
+                <img src="figures\weather_vs_accident_risk.png" alt="weather vs. Accident Risk">
+                <p>This plot shows the relationship between weather and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Mean Accident Risk by Lighting and Time of Day</h3>
+                <img src="figures\lighting_vs_time_of_day.png" alt="Mean Accident Risk by Lighting and Time of Day">
+                <p>This heatmap shows the interaction between lighting conditions and time of day on accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Mean Accident Risk for "Bright" Lighting</h3>
+                <img src="figures\bright_evening_comparison.png" alt="Mean Accident Risk for "Bright" Lighting">
+                <p>This chart compares the mean accident risk during "Bright" lighting conditions across different times of the day, highlighting the risk in the evening.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Deep Dive Analysis</h3>
+                <p>For a more detailed look at the interaction of environmental features, see the <a href="deep_dive_environmental.html">Deep Dive: Environmental Factors and Accident Risk</a> report.</p>
+            </div>
+            </div>
+        <div class="category">
+            <h2>Temporal Factors</h2>
         
-        <div class="plot">
-            <h2>accident_risk vs. Accident Risk</h2>
-            <img src="figures\accident_risk_vs_accident_risk.png" alt="accident_risk vs. Accident Risk">
-            <p>This scatter plot shows the relationship between accident_risk and accident risk. We can look for trends or patterns that suggest a correlation.</p>
-        </div>
+            <div class="plot">
+                <h3>Distribution of time_of_day</h3>
+                <img src="figures\time_of_day_distribution.png" alt="Distribution of time_of_day">
+                <p>This plot shows the distribution of the time_of_day feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>time_of_day vs. Accident Risk</h3>
+                <img src="figures\time_of_day_vs_accident_risk.png" alt="time_of_day vs. Accident Risk">
+                <p>This plot shows the relationship between time_of_day and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Distribution of holiday</h3>
+                <img src="figures\holiday_distribution.png" alt="Distribution of holiday">
+                <p>This plot shows the distribution of the holiday feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>holiday vs. Accident Risk</h3>
+                <img src="figures\holiday_vs_accident_risk.png" alt="holiday vs. Accident Risk">
+                <p>This plot shows the relationship between holiday and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Distribution of school_season</h3>
+                <img src="figures\school_season_distribution.png" alt="Distribution of school_season">
+                <p>This plot shows the distribution of the school_season feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>school_season vs. Accident Risk</h3>
+                <img src="figures\school_season_vs_accident_risk.png" alt="school_season vs. Accident Risk">
+                <p>This plot shows the relationship between school_season and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Bright Afternoon/Evening Risk by School Season</h3>
+                <img src="figures\bright_time_school_season_comparison.png" alt="Bright Afternoon/Evening Risk by School Season">
+                <p>This chart compares accident risk in bright afternoon and evening, grouped by whether it is school season or not.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Bright Afternoon/Evening Risk by Holiday</h3>
+                <img src="figures\bright_time_holiday_comparison.png" alt="Bright Afternoon/Evening Risk by Holiday">
+                <p>This chart compares accident risk in bright afternoon and evening, grouped by whether it is a holiday or not.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Deep Dive Analysis</h3>
+                <p>For a more detailed look at the interaction of temporal features, see the <a href="deep_dive_temporal.html">Deep Dive: Temporal Features and Accident Risk</a> report.</p>
+            </div>
+            </div>
+        <div class="category">
+            <h2>Safety & Historical Factors</h2>
         
-        <div class="plot">
-            <h2>Distribution of num_lanes</h2>
-            <img src="figures\num_lanes_distribution.png" alt="Distribution of num_lanes">
-            <p>This bar chart shows the count of each value for the discrete feature num_lanes.</p>
+            <div class="plot">
+                <h3>Distribution of road_signs_present</h3>
+                <img src="figures\road_signs_present_distribution.png" alt="Distribution of road_signs_present">
+                <p>This plot shows the distribution of the road_signs_present feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>road_signs_present vs. Accident Risk</h3>
+                <img src="figures\road_signs_present_vs_accident_risk.png" alt="road_signs_present vs. Accident Risk">
+                <p>This plot shows the relationship between road_signs_present and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Distribution of num_reported_accidents</h3>
+                <img src="figures\num_reported_accidents_distribution.png" alt="Distribution of num_reported_accidents">
+                <p>This plot shows the distribution of the num_reported_accidents feature.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>num_reported_accidents vs. Accident Risk</h3>
+                <img src="figures\num_reported_accidents_vs_accident_risk.png" alt="num_reported_accidents vs. Accident Risk">
+                <p>This plot shows the relationship between num_reported_accidents and accident risk.</p>
+            </div>
+            
+            <div class="plot">
+                <h3>Deep Dive Analysis</h3>
+                <p>For a more detailed look at the effect of road signs, see the <a href="deep_dive_road_signs.html">Deep Dive: Road Signs and Accident Risk</a> report.</p>
+            </div>
+            </div>
+        <div class="category">
+            <h2>Other</h2>
         </div>
-        
-        <div class="plot">
-            <h2>num_lanes vs. Accident Risk</h2>
-            <img src="figures\num_lanes_vs_accident_risk.png" alt="num_lanes vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each value of num_lanes. We can see if there are significant differences in risk for different values of this feature.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of num_reported_accidents</h2>
-            <img src="figures\num_reported_accidents_distribution.png" alt="Distribution of num_reported_accidents">
-            <p>This bar chart shows the count of each value for the discrete feature num_reported_accidents.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>num_reported_accidents vs. Accident Risk</h2>
-            <img src="figures\num_reported_accidents_vs_accident_risk.png" alt="num_reported_accidents vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each value of num_reported_accidents. We can see if there are significant differences in risk for different values of this feature.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of speed_limit</h2>
-            <img src="figures\speed_limit_distribution.png" alt="Distribution of speed_limit">
-            <p>This bar chart shows the count of each value for the discrete feature speed_limit.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>speed_limit vs. Accident Risk</h2>
-            <img src="figures\speed_limit_vs_accident_risk.png" alt="speed_limit vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each value of speed_limit. We can see if there are significant differences in risk for different values of this feature.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of road_type</h2>
-            <img src="figures\road_type_distribution.png" alt="Distribution of road_type">
-            <p>This bar chart shows the frequency of each category for the feature road_type.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>road_type vs. Accident Risk</h2>
-            <img src="figures\road_type_vs_accident_risk.png" alt="road_type vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each category of road_type. We can look for differences in the median and spread of risk across categories.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of lighting</h2>
-            <img src="figures\lighting_distribution.png" alt="Distribution of lighting">
-            <p>This bar chart shows the frequency of each category for the feature lighting.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>lighting vs. Accident Risk</h2>
-            <img src="figures\lighting_vs_accident_risk.png" alt="lighting vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each category of lighting. We can look for differences in the median and spread of risk across categories.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of weather</h2>
-            <img src="figures\weather_distribution.png" alt="Distribution of weather">
-            <p>This bar chart shows the frequency of each category for the feature weather.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>weather vs. Accident Risk</h2>
-            <img src="figures\weather_vs_accident_risk.png" alt="weather vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each category of weather. We can look for differences in the median and spread of risk across categories.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of road_signs_present</h2>
-            <img src="figures\road_signs_present_distribution.png" alt="Distribution of road_signs_present">
-            <p>This bar chart shows the frequency of each category for the feature road_signs_present.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>road_signs_present vs. Accident Risk</h2>
-            <img src="figures\road_signs_present_vs_accident_risk.png" alt="road_signs_present vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each category of road_signs_present. We can look for differences in the median and spread of risk across categories.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of public_road</h2>
-            <img src="figures\public_road_distribution.png" alt="Distribution of public_road">
-            <p>This bar chart shows the frequency of each category for the feature public_road.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>public_road vs. Accident Risk</h2>
-            <img src="figures\public_road_vs_accident_risk.png" alt="public_road vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each category of public_road. We can look for differences in the median and spread of risk across categories.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of time_of_day</h2>
-            <img src="figures\time_of_day_distribution.png" alt="Distribution of time_of_day">
-            <p>This bar chart shows the frequency of each category for the feature time_of_day.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>time_of_day vs. Accident Risk</h2>
-            <img src="figures\time_of_day_vs_accident_risk.png" alt="time_of_day vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each category of time_of_day. We can look for differences in the median and spread of risk across categories.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of holiday</h2>
-            <img src="figures\holiday_distribution.png" alt="Distribution of holiday">
-            <p>This bar chart shows the frequency of each category for the feature holiday.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>holiday vs. Accident Risk</h2>
-            <img src="figures\holiday_vs_accident_risk.png" alt="holiday vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each category of holiday. We can look for differences in the median and spread of risk across categories.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>Distribution of school_season</h2>
-            <img src="figures\school_season_distribution.png" alt="Distribution of school_season">
-            <p>This bar chart shows the frequency of each category for the feature school_season.</p>
-        </div>
-        
-        <div class="plot">
-            <h2>school_season vs. Accident Risk</h2>
-            <img src="figures\school_season_vs_accident_risk.png" alt="school_season vs. Accident Risk">
-            <p>This box plot shows the distribution of accident risk for each category of school_season. We can look for differences in the median and spread of risk across categories.</p>
-        </div>
-        
         </div>
     </body>
     </html>

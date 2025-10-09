@@ -1,0 +1,13 @@
+--- Residual XGBoost Model Tuning Log ---
+
+Best trial number: 48
+Best RMSE: 0.0767
+Best hyperparameters:
+  n_estimators: 250
+  learning_rate: 0.04137912638367983
+  max_depth: 3
+  subsample: 0.999185234245023
+  colsample_bytree: 0.7901547283056515
+  gamma: 1.0845170900304183e-08
+  reg_alpha: 0.0016587705109178757
+  reg_lambda: 0.00012874468299642057

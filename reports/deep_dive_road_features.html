@@ -1,0 +1,73 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Deep Dive: Road Features and Accident Risk</title>
+        <style>
+            body { font-family: sans-serif; margin: 2em; }
+            h1, h2, h3 { color: #333; }
+            img { border: 1px solid #ddd; border-radius: 4px; padding: 5px; max-width: 100%; height: auto; }
+            .container { max-width: 800px; margin: auto; }
+            .plot { margin-bottom: 2em; }
+            .category { margin-bottom: 3em; border-bottom: 2px solid #ccc; padding-bottom: 2em; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Deep Dive: Road Features and Accident Risk</h1>
+            <p>This report explores the complex relationships between road characteristics like speed limit, road type, and number of lanes, and their combined effect on accident risk.</p>
+    
+        <div class="plot">
+            <h3>Speed Limit Distribution by Road Type</h3>
+            <img src="figures\speed_limit_by_road_type.png" alt="Speed Limit Distribution by Road Type">
+            <p>This plot shows that highways have distinctly higher speed limits, while urban and rural roads have similar, lower speed limits. This confirms our initial hypothesis that speed limit is a strong indicator of road type.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk vs. Speed Limit by Road Type</h3>
+            <img src="figures\risk_vs_speed_by_road_type.png" alt="Accident Risk vs. Speed Limit by Road Type">
+            <p>This plot reveals a critical interaction. The trend of higher risk at higher speeds is almost entirely driven by highways. For urban and rural roads, the relationship is much flatter. This is a strong signal for a potential interaction feature.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk vs. Number of Lanes by Road Type</h3>
+            <img src="figures\risk_vs_lanes_by_road_type.png" alt="Accident Risk vs. Number of Lanes by Road Type">
+            <p>The number of lanes shows different effects depending on the road type. On highways, more lanes are associated with higher risk. On urban roads, the trend is less clear, but there might be a slight increase in risk with more lanes. This suggests another valuable interaction.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk vs. Curvature by Road Type</h3>
+            <img src="figures\risk_vs_curvature_by_road_type.png" alt="Accident Risk vs. Curvature by Road Type">
+            <p>This plot shows the relationship between road curvature and accident risk, broken down by road type. Across all types, higher curvature tends to be associated with slightly higher accident risk, but the effect is most pronounced on highways and rural roads.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk: Public vs. Private Roads</h3>
+            <img src="figures\public_road_analysis.png" alt="Accident Risk: Public vs. Private Roads">
+            <p>This plot tests the hypothesis that public roads are more dangerous than private roads. It compares the distribution of accident risk for each category.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk vs. Road Type (Violin Plot)</h3>
+            <img src="figures\ar_vs_road_type_violin.png" alt="Accident Risk vs. Road Type (Violin Plot)">
+            <p>This violin plot shows the probability density of accident risk for each road type. We can see the shape of the distribution, not just the summary statistics. This confirms that highways have a higher median accident risk and a wider distribution of risk values.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk vs. Curvature (Hexbin Plot)</h3>
+            <img src="figures\ar_vs_curvature_hexbin.png" alt="Accident Risk vs. Curvature (Hexbin Plot)">
+            <p>This hexbin plot shows the density of data points for curvature and accident risk. The darkest areas indicate the most common combinations. We can see that the highest concentration of points is at low curvature and low-to-medium accident risk.</p>
+        </div>
+        
+        <div class="plot">
+            <h3>Accident Risk vs. Curvature with Regression Line by Road Type</h3>
+            <img src="figures\ar_vs_curvature_regression_faceted.png" alt="Accident Risk vs. Curvature with Regression Line by Road Type">
+            <p>This plot shows the relationship between curvature and accident risk for each road type, with a fitted regression line. This makes the trend clearer. We can see a positive correlation for all road types, but the slope of the line (the strength of the relationship) is slightly different for each. This reinforces the idea that interaction features could be valuable.</p>
+        </div>
+        
+        </div>
+    </body>
+    </html>
+    
